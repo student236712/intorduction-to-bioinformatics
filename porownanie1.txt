@@ -1,0 +1,13 @@
+#Sequence1: NM_001273580.1
+#Sequence2: NM_001164014.1
+#Match: 1
+#Mismatch: -1
+#Gap: -2
+#Mode: similarity
+#Score: -643
+#Length: 774
+#Gaps: 469/774 (60.5943 %)
+#Identity: 96/774 (12.4031 %)
+-TG-GGGATATTTTCCAACTCAAAAAC--TGGTGCGTTTCAGTTCCTTTACAGACGCAAGACGCGTAATATTCGATCGGTGTAACGGTGAACAGAATCGGCAGCGGGAAAACCGAACGCGGCGAACTCAGCTGATTGAATGAAAACG-CCAAGCTGAGCAGCAGCCACAATTGCCATTGCCCCAACCAGC-GCTCATTGAGAGAGGGAGCCAACGAGAGAGCGAGCAACAAGCAACTGCAGAGCGAGAAGAACTGTCCGTCGGGCTTCCAAGATGGGTTCTGGTGATGCAGAGAACGGCAAGAAGATATTTGTGCAGAAGTGCGCCCAGTGCCACA-CCTACGAAGTGGGCGGCAAACACAAGGTGGGCCCAAATCTTGGCGGGGTCGTGGGTCGCAAGTGTGGCACAGCAGCGGGATACAAGTATACCGATGCCAATATAAAGAAGGGCGTTACCTGGACAGAGGGGAATTTGGACGAGTACCTCAAGGACCCGAAGAAATACATTCCCGGAACAAAGATGGTGTTCGCAGGTCTTAAAAAGGCTGAGGAGCGGGCCGATTTGATTGCCTTCCTCAAGTCAAACAAGTAGAATCGCCTGCGAAACAACAAGATCGGCCACCATGCTATCCAGAAAACTGCGCTTAAAGACTACAAACATATTCAAAAGATGACGTATTTCACTTGGATTTCGAAACTTTGATTGGGAATGGTCGAGCTCAAATACATTTCAAAAAGGTTTACTTTCACTTTAGCCAATTAAAGTTGATAAACC
+ || | ||| ||    |   ||| ||   |       |||||    |                                                                                                    |                                          |                                         ||       |            |    | |                                                                          |                                                                                                                                                                                                  ||    ||  |       | ||    |        |   ||          |      ||   |            |||     | | || |    |     |  ||   |    | ||              |   |  ||        |  |  ||  |   |     | ||    | |  |   | ||  | |   || ||||       || |            |||        |  
+ATGGGTGATGTTGAGAAGGGCAAGAAGATTTT--T-GTTCAGA-AGT------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------GTGCCCA-G-TGCCATA-----C---CG----TGGAAAAG------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------GGAGGCAAGCACAAGACTGGGCCAAACCTCCATGGTCTATTTGGGCGAAAGACGGGTCAGGCCCCTGGCTTCTCTTACACAGATGCCAACAAGAACAAAGGCATCACCTGGAAAGAGGAAACACTGATGGAATATTTGGAGAATCCCAAGAAGTACATCCCTGGAACAAAAATGATCTTTGCTGGCATTAAGAAGAAGACAGAAAGAGAAGACTTAATAGCTTATCTCAAAAAAGCTACTAATGAGTAA
