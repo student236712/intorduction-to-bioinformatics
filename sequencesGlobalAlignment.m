@@ -39,8 +39,8 @@ elseif length(varargin) == 3
         seq1 = readFasta(varargin{1,1},varargin{1,2}); 
     end
 end
-[R,sequence1,sequence2,id1,id2] = scorringMatrix(match,mismatch,gap,mode,seq1,seq2);
-T = tracBackMatrix(R,mode);
+[R,sequence1,sequence2,id1,id2] = scoringMatrix(match,mismatch,gap,mode,seq1,seq2);
+T = tracBackMatrix(R,match,mismatch,gap,sequence1,sequence2);
 showAndSaveInfo(R,T,match,mismatch,gap,mode,sequence1,sequence2,id1,id2,textFileName);
 figureFromMatrix(R,T,id1,id2,figureName);
 end
