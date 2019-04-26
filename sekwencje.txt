@@ -1,0 +1,13 @@
+#1: 1
+#2: 2
+#Mode: similarity
+#Match: 1
+#Mismatch: -1
+#Gap: -2
+#Score: 4
+#Length: 28
+#Gaps: 2/28 (7.1429 %)
+#Identity: 17/28 (60.7143 %)
+CGATGCATCG-AGTCGACGGATCTACTA
+|||||||||| || ||| ||        
+CGATGCATCGCAGGCGA-GGCAGGGGGG
