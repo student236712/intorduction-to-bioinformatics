@@ -30,7 +30,7 @@ u = sequence2(koniec2:kolumna);
 
 while i >= 2 || j >= 2
     
-    if (i >= 2 && j >= 2)
+    
         if(t(i,j) == 1 && t(i,j-1) == 1)
             j = j-1;
             k = insertAfter(k,i,"-");
@@ -45,16 +45,6 @@ while i >= 2 || j >= 2
             j = j-1;
             i = i-1;
         end
-    elseif(i < 2)
-        j = j-1;
-        k = insertAfter(k,i,"-");
-        numberOfGaps = numberOfGaps + 1;
-        
-    elseif (j < 2)
-        i = i-1;
-        u = insertAfter(u,j,"-");
-        numberOfGaps = numberOfGaps + 1;
-    end
 end
 if (koniec1 == 1 )
     k = k(2:end);
