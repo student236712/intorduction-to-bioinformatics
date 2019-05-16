@@ -41,7 +41,9 @@ for g = 1:countMax
                 if((R(i,j) - H(2)) == gap)
                     i = i-1;
                 else
-                    j = j-1;
+                    if((R(i,j) - H(3)) == gap)
+                        j = j-1;
+                    end
                 end
             end
         if (max(H)>0)
