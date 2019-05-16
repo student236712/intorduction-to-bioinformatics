@@ -13,7 +13,7 @@ function [numberOfGaps,numberOfIdentity,k,compares,u,gapsPercent,identityPercent
 %numberOfGaps - liczba przerw w obu porównywanych sekwencjach
 %numberOfIdentity - liczba par analogicznych w porównywanych sekwencjach
 %k - pierwsza sekwencja po uzupe³nieniu przerwami
-%compares - linia tekstu pokazuj¹ca analogiczne pary "|" oraz
+%compares - linia tekstu pokazuj¹ca analogiczne pary "*" oraz
 %nieanalogiczne " "
 %u - druga sekwencja po uzupe³nieniu przerwami
 %gapsPercent - procent przerw w porównywanych sekwencjach
@@ -28,9 +28,7 @@ u = sequence2(koniec2:kolumna);
 [~,i] = size(k);
 [~,j] = size(u);
 
-while i >= 2 || j >= 2
-    
-    
+while i >= 2 && j >= 2
         if(t(i,j) == 1 && t(i,j-1) == 1)
             j = j-1;
             k = insertAfter(k,i,"-");
