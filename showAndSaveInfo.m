@@ -18,23 +18,51 @@ fprintf(fid,'%s%s%s%s%s\n%s%1.f%1.f%1.f%1.f\n%s%1.f%1.f%1.f%1.f\n%s%1.f%1.f%1.f%
     rowsNames{2,1}+" ",rowsNames{3,1}+" ",rowsNames{4,1}+" ",columnsNames{1,1}+" ",substitutionPoints(1,:)...
     ,columnsNames{1,2}+" ",substitutionPoints(2,:),columnsNames{1,3}+" ",substitutionPoints(3,:),columnsNames{1,4}+" ",substitutionPoints(4,:));
 for i = 1:countMax
-[numberOfGaps,numberOfIdentity,seq1,comp,seq2,gapsPercent,identityPercent,m]...
-    = createInfo(data(i).aligmentMatrix,sequence1,sequence2,data(i).wiersz,data(i).kolumna,data(i).koniec1,data(i).koniec2);
-disp(">seq1 "+(data(i).koniec1)+"-"+(data(i).wiersz-1))
-disp(">seq2 "+(data(i).koniec2)+"-"+(data(i).kolumna-1))
-disp("#Gap " + gap)
-disp("#Score: "+score);
-disp("#Gaps: " +numberOfGaps + "/" + m + " ("+ gapsPercent+" %)")
-disp("#Identity: "+numberOfIdentity+"/" + m + " ("+identityPercent+" %)")
-disp(seq1)
-disp(comp)
-disp(seq2)
-
-fprintf(fid, '%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s',...
-    ">seq1 "+(data(i).koniec1)+"-"+(data(i).wiersz-1),">seq2 "+(data(i).koniec2)+"-"+(data(i).kolumna-1),...
-    "#Gap: " + gap,"#Length: " + m,...
-    "#Gaps: " + numberOfGaps + "/" + m + " (" + gapsPercent + " %)",...
-    "#Identity: " + numberOfIdentity + "/" + m + " ("+identityPercent+" %)",seq1,comp,seq2);
+    [numberOfGaps,numberOfIdentity,seq1,comp,seq2,gapsPercent,identityPercent,m]...
+        = createInfo(data(i).aligmentMatrix,sequence1,sequence2,data(i).wiersz,data(i).kolumna,data(i).koniec1,data(i).koniec2);
+    disp(">seq1 " + (data(i).koniec1) + "-" + (data(i).wiersz-1))
+    disp(">seq2 " + (data(i).koniec2) + "-" + (data(i).kolumna-1))
+    disp("#Gap " + gap)
+    disp("#Score: " + score);
+    disp("#Length: " + m)
+    disp("#Gaps: " + numberOfGaps + "/" + m + " ("+ gapsPercent+" %)")
+    disp("#Identity: " + numberOfIdentity + "/" + m + " ("+identityPercent+" %)")
+    remeinder = rem(m,60);
+    k = floor(m/60);
+    if k>0
+        constant = 60;
+    else
+        constant = remeinder;
+    end
+    if remeinder > 0
+        k = k+1;
+    end
+    
+    for j = 1:k
+        
+        if j == 1
+            w = 1;
+            t = constant;
+        elseif j<k
+            w = w + constant;
+            t = t + constant;
+        else
+            w = w + constant;
+            t = m;
+        end
+        
+            disp("#seq1 "+seq1(w:t))
+            disp("#seq2 "+seq2(w:t))
+            disp("      "+comp(w:t))
+            disp(newline)
+        
+    end
+    
+    fprintf(fid, '%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s',...
+        ">seq1 "+(data(i).koniec1)+"-"+(data(i).wiersz-1),">seq2 "+(data(i).koniec2)+"-"+(data(i).kolumna-1),...
+        "#Gap: " + gap,"#Length: " + m,...
+        "Score: " + score,"#Gaps: " + numberOfGaps + "/" + m + " (" + gapsPercent + " %)",...
+        "#Identity: " + numberOfIdentity + "/" + m + " ("+identityPercent+" %)",seq1,comp,seq2);
 end
 fclose(fid);
 end

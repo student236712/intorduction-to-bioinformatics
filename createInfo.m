@@ -1,4 +1,4 @@
-function [numberOfGaps,numberOfIdentity,k,compares,u,gapsPercent,identityPercent,n] = createInfo(tracBackMatrix,sequence1,sequence2,wiersz,kolumna,koniec1,koniec2)
+function [numberOfGaps,numberOfIdentity,k,compares,u,gapsPercent,identityPercent,x] = createInfo(tracBackMatrix,sequence1,sequence2,wiersz,kolumna,koniec1,koniec2)
 %Funkcja zwracaj¹ca statystyki dla dopasowania globalnego dwóch sekwencji
 %oraz koñcowe sekwencje wynikaj¹ce z optymalnego dopasowania (po wstawieniu
 %przerw)
@@ -21,46 +21,59 @@ function [numberOfGaps,numberOfIdentity,k,compares,u,gapsPercent,identityPercent
 %length - d³ugoœæ sekwencji
 
 numberOfGaps = 0;
-numberOfIdentity = 0;
 t = tracBackMatrix;
+k = sequence1(koniec1:wiersz);
+u = sequence2(koniec2:kolumna);
 
-k = sequence1(koniec1+1:wiersz);
-u = sequence2(koniec2+1:kolumna);
+[~,i] = size(k);
+[~,j] = size(u);
 
-
-[one,n] = size(k);
-[one,m] = size(u);
-for i = n:-1:2
-    for j = m:-1:2
+while i >= 2 || j >= 2
+    
+    if (i >= 2 && j >= 2)
         if(t(i,j) == 1 && t(i,j-1) == 1)
-            k = insertBefore(k,i,"-");
-            numberOfGaps = numberOfGaps+1;
+            j = j-1;
+            k = insertAfter(k,i,"-");
+            numberOfGaps = numberOfGaps + 1;
             
         elseif(t(i,j) == 1 && t(i-1,j) == 1)
+            i = i-1;
+            u = insertAfter(u,j,"-");
+            numberOfGaps = numberOfGaps + 1;
             
-            u = insertBefore(u,j,"-");
-            numberOfGaps = numberOfGaps+1;
-            
+        else
+            j = j-1;
+            i = i-1;
         end
+    elseif(i < 2)
+        j = j-1;
+        k = insertAfter(k,i,"-");
+        numberOfGaps = numberOfGaps + 1;
+        
+    elseif (j < 2)
+        i = i-1;
+        u = insertAfter(u,j,"-");
+        numberOfGaps = numberOfGaps + 1;
     end
 end
-
-newString = join(k,1);
-k = replace(newString,newline,"");
-newString2 = join(u,1);
-u = replace(newString2,newline,"");
+if (koniec1 == 1 )
+    k = k(2:end);
+end
+if(koniec2 == 1)
+    u = u(2:end);
+end
+x = length(u);
 compares = k;
-[one,n] = size(k);
-for i = 1:n
-    if k(i) == u(i)
-        compares(i) = "|";
+numberOfIdentity = 0;
+for i = 1:x
+    if u(i) == k(i)
+        compares(i) = "*";
         numberOfIdentity = numberOfIdentity+1;
     else
         compares(i) = " ";
     end
-    
 end
-gapsPercent = (numberOfGaps / n)*100;
-identityPercent = (numberOfIdentity / n)*100;
+gapsPercent = (numberOfGaps / x)*100;
+identityPercent = (numberOfIdentity / x)*100;
 end
 
