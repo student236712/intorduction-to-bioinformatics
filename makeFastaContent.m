@@ -3,9 +3,12 @@ function fastaContent = makeFastaContent(text)
 %tekstowego
 rozdzielLinie = splitlines(text);
 pierwszaLinia = rozdzielLinie{1,1};
-[jeden,iloscZnakow] = size(pierwszaLinia);
+[~,iloscZnakow] = size(pierwszaLinia);
 rozdzielPierwszaLinie = split(pierwszaLinia);
 id = rozdzielPierwszaLinie{1,1};
-fastaContent = struct('identifier',id(2:end) ,'sequence',text(iloscZnakow+1:end)); 
+
+newString = join(text(iloscZnakow+1:end),1);
+sequence = replace(newString,newline,"");
+fastaContent = struct('identifier',id(2:end) ,'sequence',sequence); 
 end
 
