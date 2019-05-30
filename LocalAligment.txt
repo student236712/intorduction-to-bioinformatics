@@ -1,0 +1,27 @@
+# Substitution matrix:
+#A C G T 
+A 2-7-5-7
+C -72-7-5
+G -5-72-7
+T -7-5-72
+Ilosc znalezionych sciezek: 2
+>seq1 1078-327
+>seq2 270-1151
+#Gap: -2
+#Length: 82
+Score: 36
+#Gaps: 32/82 (39.0244 %)
+#Identity: 50/82 (60.9756 %)
+AGAGTGTGAGACCAGCTGCCTATGG-G-A-CT-GAG-CGAT--GCAAG-ATGTGTTCACATCTCACGTGATGACATCAACAA
+AGA--G-GAGA-CA-CTG---ATGGAGTACCTGGAGA--ATCC-CAAGAA---G-T-ACATC-C-C-TG--GA-A-CAA-AA
+***  * **** ** ***   **** * * ** ***   **   **** *   * * ***** * * **  ** * *** **
+>seq1 1152-345
+>seq2 335-1160
+#Gap: -2
+#Length: 11
+Score: 36
+#Gaps: 2/11 (18.1818 %)
+#Identity: 8/11 (72.7273 %)
+CC-CTGGC-TT
+TCGCTGGCATT
+ * ***** **
