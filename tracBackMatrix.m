@@ -1,4 +1,4 @@
-function [data,countMax] = tracBackMatrix(R,substitutionMatrixPath,gap,sequence1,sequence2)
+function [data,countMax] = tracBackMatrix(R,substitutionMatrixPath,gap,sequence1,sequence2,alignmentAmount)
 %Funkcja generuj¹ca macierz ze œcie¿k¹ optymalnego dopasowania (poruszanie
 %siê po 1 odpowiada œcie¿ce)
 %Argumenty wejœciowe:
@@ -9,10 +9,17 @@ function [data,countMax] = tracBackMatrix(R,substitutionMatrixPath,gap,sequence1
 %Argumenty wyjœciowe:
 %data  - struktura z danymi dopasowania
 %countMax - ilosc znalezionych dopasowan lokalnych
+%alignmentAmount - ilosc szukanych sciezek dopasowan
 [substitutionPoints,rowsNames,columnsNames] = readSubstitutionMatrix(substitutionMatrixPath);
 [n,m] =  size(R);
 [t,u] = size(substitutionPoints);
-[a,b] = find(R == max(max(R)));
+if isstring(alignmentAmount)
+    if alignmentAmount == "all"
+        [a,b] = find(R == max(max(R)));
+    end
+else
+    [a,b] = find(R == max(max(R)),alignmentAmount,'last');
+end
 [countMax,~] = size(a);
 V = 0;
 for g = 1:countMax
@@ -21,8 +28,12 @@ for g = 1:countMax
     i =  a(g,1);
     j =  b(g,1);
     aligmentMatrix(i,j) = 1;
-    while((i>=2 && j>=2) && (max(H)>0))
-        
+    endSeq1 = i;
+    endSeq2 = j;
+    
+    
+    while((i >= 2 && j >= 2) && (max(H)>0))
+        if ~ismember(i-1,a) && ~ismember(j-1,b)
             H(1) = R(i-1,j-1);
             H(2) = R(i-1,j);
             H(3) = R(i,j-1);
@@ -34,7 +45,7 @@ for g = 1:countMax
                     end
                 end
             end
-            if((R(i,j)-H(1))== V)
+            if((R(i,j) - H(1)) == V)
                 i = i-1;
                 j = j-1;
             else
@@ -43,20 +54,26 @@ for g = 1:countMax
                 else
                     if((R(i,j) - H(3)) == gap)
                         j = j-1;
+                    else
+                        break;
                     end
                 end
             end
-        if (max(H)>0)
-            aligmentMatrix(i,j) = 1;
-            koniec1 = i;
-            koniec2 = j;
+            if (max(H) > 0)
+                aligmentMatrix(i,j) = 1;
+                endSeq1 = i;
+                endSeq2 = j;
+            end
+        else
+            break;
         end
+        
     end
-    data(g).aligmentMatrix = aligmentMatrix(koniec1:a(g,1),koniec2:b(g,1));
-    data(g).koniec1 = koniec1;
-    data(g).wiersz = a(g,1);
-    data(g).koniec2 = koniec2;
-    data(g).kolumna = b(g,1);
-    data(g).wholeAligmentMatrix = aligmentMatrix;    
+    data(g).aligmentMatrix = aligmentMatrix(endSeq1:a(g,1),endSeq2:b(g,1));
+    data(g).endSeq1 = endSeq1;
+    data(g).startSeq1 = a(g,1);
+    data(g).endSeq2 = endSeq2;
+    data(g).startSeq2 = b(g,1);
+    data(g).wholeAligmentMatrix = aligmentMatrix;
 end
 end

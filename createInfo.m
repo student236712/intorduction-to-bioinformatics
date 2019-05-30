@@ -1,13 +1,13 @@
-function [numberOfGaps,numberOfIdentity,k,compares,u,gapsPercent,identityPercent,x] = createInfo(tracBackMatrix,sequence1,sequence2,wiersz,kolumna,koniec1,koniec2)
+function [numberOfGaps,numberOfIdentity,k,compares,u,gapsPercent,identityPercent,x] = createInfo(tracBackMatrix,sequence1,sequence2,startSeq1,startSeq2,endSeq1,endSeq2)
 %Funkcja zwracaj¹ca statystyki dla dopasowania globalnego dwóch sekwencji
 %oraz koñcowe sekwencje wynikaj¹ce z optymalnego dopasowania (po wstawieniu
 %przerw)
 %Argumenty wejœciowe:
 %tracBackMatrix - macierz ze œcie¿k¹ optymalnego dopasowania
 %sequence1,sequence2 - sekwencje porównywane
-%wiersz - indeks wiersza macierzy punktów, w którym koñczy siê optymalna œcie¿ka
-%kolumna - indeks kolumny macierzy punktów, w którym koñczy siê optymalna œcie¿ka
-%koniec1 - indeks wiersza macierzy punktów, w którym zaczyna siê optymalna œcie¿ka
+%startSeq2 - indeks startSeq2a macierzy punktów, w którym koñczy siê optymalna œcie¿ka
+%startSeq1 - indeks kolumny macierzy punktów, w którym koñczy siê optymalna œcie¿ka
+%koniec1 - indeks startSeq2a macierzy punktów, w którym zaczyna siê optymalna œcie¿ka
 %koniec2 - indeks kolumny macierzy punktów, w którym zaczyna siê optymalna œcie¿ka
 %Argumenty wyjœciowe:
 %numberOfGaps - liczba przerw w obu porównywanych sekwencjach
@@ -22,34 +22,33 @@ function [numberOfGaps,numberOfIdentity,k,compares,u,gapsPercent,identityPercent
 
 numberOfGaps = 0;
 t = tracBackMatrix;
-k = sequence1(koniec1:wiersz);
-u = sequence2(koniec2:kolumna);
+k = sequence1(endSeq1:startSeq1);
+u = sequence2(endSeq2:startSeq2);
 
 [~,i] = size(k);
 [~,j] = size(u);
 
 while i >= 2 && j >= 2
-        if(t(i,j) == 1 && t(i,j-1) == 1)
-            j = j-1;
-            k = insertAfter(k,i,"-");
-            numberOfGaps = numberOfGaps + 1;
-            
-        elseif(t(i,j) == 1 && t(i-1,j) == 1)
-            i = i-1;
-            u = insertAfter(u,j,"-");
-            numberOfGaps = numberOfGaps + 1;
-            
-        else
-            j = j-1;
-            i = i-1;
-        end
+    if(t(i,j) == 1 && t(i,j-1) == 1)
+        j = j-1;
+        k = insertAfter(k,i,"-");
+        numberOfGaps = numberOfGaps + 1;
+        
+    elseif(t(i,j) == 1 && t(i-1,j) == 1)
+        i = i-1;
+        u = insertAfter(u,j,"-");
+        numberOfGaps = numberOfGaps + 1;
+        
+    else
+        j = j-1;
+        i = i-1;
+    end
 end
-if (koniec1 == 1 )
+if (endSeq1 == 1) || (endSeq2 == 1)
     k = k(2:end);
-end
-if(koniec2 == 1)
     u = u(2:end);
 end
+
 x = length(u);
 compares = k;
 numberOfIdentity = 0;

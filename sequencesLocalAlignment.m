@@ -1,4 +1,5 @@
-function [] = sequencesLocalAlignment(gap,textFileName,figureName,substitutionMatrixPath,varargin)
+function [] = sequencesLocalAlignment(gap,textFileName,...
+    figureName,substitutionMatrixPath,alignmentAmount,varargin)
 %Funkcja pozawalaj¹ca na zbadanie lokalnego dopasowania dwóch sekwencji
 %wraz ze statystykami dopasowania i prezentacj¹ graficzn¹
 %Argumenty wejœciowe:
@@ -8,6 +9,9 @@ function [] = sequencesLocalAlignment(gap,textFileName,figureName,substitutionMa
 %figureName - nazwa pliku, do którego ma zostaæ zapisany wykres
 %substitutionMatrixPath - sciezka do pliku z macierz¹ substytucji w
 %formacie .txt
+%alignemntAmount - ilosc szukanych sciezek dopasowan. Po wpisaniu "all"
+%szukane sa wszystkie mozliwe sciezki. Wpisanie liczby wiekszej 
+%od faktycznej liczby znalezionych sciezek nie powoduje bledu 
 %Sekwencje mog¹ zostaæ wczytane: rêcznie, z pliku tekstowego o formacie
 %fasta lub z z bazy danych NCBI.
 %Przy wczytywaniu:
@@ -40,7 +44,7 @@ elseif length(varargin) == 3
     end
 end
 [R,sequence1,sequence2,id1,id2] = scoringMatrix(gap,seq1,seq2,substitutionMatrixPath);
-[data,countMax] = tracBackMatrix(R,substitutionMatrixPath,gap,sequence1,sequence2);
+[data,countMax] = tracBackMatrix(R,substitutionMatrixPath,gap,sequence1,sequence2,alignmentAmount);
 
 score = max(max(R));
 showAndSaveInfo(score,gap,sequence1,sequence2,textFileName,data,countMax,substitutionMatrixPath);

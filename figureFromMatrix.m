@@ -12,7 +12,7 @@ function [] = figureFromMatrix(R,id1,id2,figureName,data,countMax)
 close all
 figure('Name','Lokalne dopasowanie sekwencji');
 hold on
-colours = ['b','k','r','g','y','c','m','w'];
+colours = ['b','k','m','g','r','c','y','w','b','k','m','g','r','c','y','w'];
 colormap('summer');
 imagesc(R);
 for i = 1:countMax
