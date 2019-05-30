@@ -20,12 +20,15 @@ sequence2 = "-" + fastaStruct2.sequence;
 
 n =  length(sequence1{1,1});
 m =  length(sequence2{1,1});
-
 H =  zeros(1,3);
-
 R =  zeros(n,m);
-R((2:n),1) =  2:gap:(2*n)-1;
-R(1,(2:m)) =  2:gap:(2*m)-1;
+if gap >= 1
+    R((2:n),1) =   gap:gap:(gap*n)-1;
+    R(1,(2:m)) =   gap:gap:(gap*m)-1;
+    
+else
+    error('Praca w trybie distance wymaga dodadniego kosztu gap');
+end
 
 for i =  2:n
     for j =  2:m

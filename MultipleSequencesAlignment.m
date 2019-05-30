@@ -1,4 +1,5 @@
-function [] = MultipleSequencesAlignment(match,mismatch,gap,sequencesAmount,textFileName,varargin)
+function [] = MultipleSequencesAlignment(match,mismatch,gap,...
+    sequencesAmount,textFileName,varargin)
 %Funkcja pozawalaj¹ca na zbadanie dopasowania wielu sekwencji za pomoc¹
 %metody "na gwiazdê". Tworzony i prezentuje statystyki dopasowania oraz
 %dopasowane sekwencje
@@ -24,7 +25,6 @@ if length(varargin) == 0
 elseif contains(varargin{1,2},'.fasta')
     j = 2:sequencesAmount+1;
         for i = 1:sequencesAmount
-            
             seq(i) = readFasta(varargin{1,1},varargin{1,j(i)});
         end
     

@@ -27,25 +27,25 @@ while i >=  2 || j >= 2
             j = j-1;
             cost = cost + match;
         else
-            if ((R(i,j)-H(1)) == mismatch ) && (sequence1(i) ~= sequence2(j))
+            if ((R(i,j) - H(1)) == mismatch ) && (sequence1(i) ~= sequence2(j))
                 i = i-1;
                 j = j-1;
                 cost = cost + mismatch;
             else
                 cost = cost + gap;
-                if (R(i,j)- H(2) == gap)
+                if (R(i,j) - H(2) == gap)
                     i = i-1;
                 else
-                    if (R(i,j)- H(3) == gap )
+                    if (R(i,j) - H(3) == gap )
                         j = j-1;
                     end
                 end
             end
         end
-    elseif (j<2)
+    elseif(j < 2)
         cost = cost + gap;
         i = i-1;
-    elseif(i<2)
+    elseif(i < 2)
         cost = cost + gap;
         j = j-1;
     end

@@ -17,7 +17,7 @@ else
     a = 1;
 end
 for i = 1:x
-    if i == a 
+    if i == a
         [sequencesStruct(centralSequenceNumber),sequencesStruct(i)] = ...
             alignTwoSequences(match,mismatch,gap,seq(centralSequenceNumber),seq(i));
     end
@@ -25,12 +25,14 @@ for i = 1:x
         [sequencesStruct(centralSequenceNumber),sequencesStruct(i)] = ...
             alignTwoSequences(match,mismatch,gap,sequencesStruct(centralSequenceNumber),seq(i));
         
-        for j = 1:i-1
-            if j ~= centralSequenceNumber 
-                [sequencesStruct(centralSequenceNumber),sequencesStruct(j)] = ...
-                    alignTwoSequences(match,mismatch,gap,sequencesStruct(centralSequenceNumber),seq(j));
+        if i == x
+            for j = 1:i-1
+                if j ~= centralSequenceNumber
+                    [sequencesStruct(centralSequenceNumber),sequencesStruct(j)] = ...
+                        alignTwoSequences(match,mismatch,gap,sequencesStruct(centralSequenceNumber),seq(j));
+                end
             end
-        end    
+        end
     end
 end
 end

@@ -10,7 +10,7 @@ function [] = showAndSaveInfo(match,mismatch,gap,centralSequenceNumber,sequences
 
 [~,s] = size(sequencesStruct);
 [comp,totalCostOfAlignment,lengthOfSequences,sequencesStruct,gapsCounter] = createInfoG(sequencesStruct,centralSequenceNumber,match,mismatch,gap);
-
+ID = strings(s,1);
 for g = 1:s
     ID(g,1) = " " + sequencesStruct(g).identifier;
 end
@@ -29,47 +29,47 @@ fprintf(fid,'%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n',"#Match: " + match,...
     "#Central sequence: " + sequencesStruct(centralSequenceNumber).identifier,...
     "#Alignment cost: " + totalCostOfAlignment);
 
-remeinder = rem(lengthOfSequences,60);
-k = floor(lengthOfSequences/60);
-if k > 0
+remainder = rem(lengthOfSequences,60);
+dividend = floor(lengthOfSequences/60);
+if dividend > 0
     constant = 60;
 else
-    constant = remeinder;
+    constant = remainder;
 end
-if remeinder > 0
-   k = k + 1;
+if remainder > 0
+   dividend = dividend + 1;
 end
 
-for j = 1:k
+for j = 1:dividend
     if j == 1
-        w = 1;
-        t = constant;
-    elseif j<k
-        w = w + constant;
-        t = t + constant;
+        partStart = 1;
+        partEnd = constant;
+    elseif j<dividend
+        partStart = partStart + constant;
+        partEnd = partEnd + constant;
     else
-        w = w + constant;
-        t = lengthOfSequences;
+        partStart = partStart + constant;
+        partEnd = lengthOfSequences;
     end
     
     for g = 1:s
-        if j < k
-            disp(offsetIDs(g) + " "+sequencesStruct(g).sequence(w:t)...
+        if j < dividend
+            disp(offsetIDs(g) + " "+sequencesStruct(g).sequence(partStart:partEnd)...
                 + " " + ((j*constant) - gapsCounter(g,j)))
             fprintf(fid, '\n%s%s%s%s%s%s%s\n',offsetIDs(g) + " " + ...
-                sequencesStruct(g).sequence(w:t) + " " + ....
+                sequencesStruct(g).sequence(partStart:partEnd) + " " + ....
                 ((j*constant) - gapsCounter(g,j)));
         else
-            disp(offsetIDs(g) + " " + sequencesStruct(g).sequence(w:t) +...
+            disp(offsetIDs(g) + " " + sequencesStruct(g).sequence(partStart:partEnd) +...
                 " " +(lengthOfSequences-gapsCounter(g,j)))
             fprintf(fid, '\n%s%s%s%s%s%s%s%s%s\n',offsetIDs(g)+...
-                " " + sequencesStruct(g).sequence(w:t) + " " +...
+                " " + sequencesStruct(g).sequence(partStart:partEnd) + " " +...
                 (lengthOfSequences - gapsCounter(g,j)));
         end
     end
-    disp(offsetIDs(g+1) + " " + comp(w:t))
+    disp(offsetIDs(g+1) + " " + comp(partStart:partEnd))
     disp(newline)
-    fprintf(fid, '\n%s%s%s\n',offsetIDs(s+1) + " " + comp(w:t));
+    fprintf(fid, '\n%s%s%s\n',offsetIDs(s+1) + " " + comp(partStart:partEnd));
 end
 fclose(fid);
 end
